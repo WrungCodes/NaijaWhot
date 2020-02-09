@@ -69,10 +69,10 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof TokenExpiredException) {
             return response()->json([
-                'status' => HTTP_UNAUTHORIZED,
+                'status' => CODE_BLACKLISTED_USER,
                 'message' => "Token Expired",
                 'error' => $exception->getMessage(),
-            ], HTTP_UNAUTHORIZED);
+            ], CODE_BLACKLISTED_USER);
         }
 
         if ($exception instanceof TokenInvalidException) {
@@ -85,10 +85,10 @@ class Handler extends ExceptionHandler
 
         if ($exception instanceof JWTException) {
             return response()->json([
-                'status' => HTTP_UNAUTHORIZED,
+                'status' => HTTP_EXPECTATION_FAILED,
                 'message' => "No Token Provided",
                 'error' => $exception->getMessage(),
-            ], HTTP_UNAUTHORIZED);
+            ], HTTP_EXPECTATION_FAILED);
         }
 
         try {
