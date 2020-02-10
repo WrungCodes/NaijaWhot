@@ -13,4 +13,9 @@ class StakeType extends Model
     protected $hidden = [
         'id'
     ];
+
+    protected $casts = [
+        'win_amount' => 'float',
+        'stake_amount' => 'float',
+    ];
 }
