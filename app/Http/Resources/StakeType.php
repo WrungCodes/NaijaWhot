@@ -17,8 +17,8 @@ class StakeType extends JsonResource
         return [
             'uid' => $this->uid,
             'number_of_players' => $this->number_of_players,
-            'stake_amount' => $this->stake_amount,
-            'win_amount' => $this->win_amount
+            'stake_amount' => number_format($this->stake_amount, 2),
+            'win_amount' => number_format($this->win_amount, 2)
         ];
     }
 }

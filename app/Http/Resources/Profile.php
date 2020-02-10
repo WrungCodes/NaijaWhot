@@ -16,7 +16,7 @@ class Profile extends JsonResource
     {
         return [
             'username' => $this->user->username,
-            'naira_balance' => $this->naira_balance,
+            'naira_balance' =>  number_format($this->naira_balance, 2),
             'email' => $this->user->email
         ];
     }
