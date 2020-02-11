@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\GladePay;
+namespace App\Services\Paystack;
 
 use App\Services\Service;
 

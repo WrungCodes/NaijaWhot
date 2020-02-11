@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Bank;
 use App\CoinDeal;
 use App\Item;
 use App\StakeType;
@@ -22,5 +23,10 @@ class Find
     public static function GetStakeTypeWithUid(string $uid)
     {
         return StakeType::where(['uid' => $uid])->first();
+    }
+
+    public static function GetBankWithUid(string $uid)
+    {
+        return Bank::where(['uid' => $uid])->first();
     }
 }

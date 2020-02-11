@@ -15,6 +15,7 @@ use App\Http\Controllers\PointController;
 use App\Http\Controllers\StakeController;
 use App\Http\Controllers\StakeTypeController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\WithdrawalController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -61,6 +62,10 @@ Route::group(['middleware' => ['encrypt', 'jwt.verify', 'email.verify']], functi
     });
 
     Route::post('/deposit', [ControllersDeposit::class, 'deposit'])->name('deposit');
+
+    Route::post('/withdraw', [WithdrawalController::class, 'withdraw'])->name('withdraw');
+
+    Route::get('/banks', [WithdrawalController::class, 'banks'])->name('banks');
 
     Route::name('stake.')->prefix('stake')->group(function () {
         Route::get('/get', [StakeTypeController::class, 'get'])->name('get');

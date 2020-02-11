@@ -3,7 +3,7 @@
 namespace App\Logics\Checkout\Gateways\Paystack;
 
 use App\Logics\Checkout\CheckoutGateway;
-use App\Services\GladePay\PaystackCheckout as PaystackCheckoutService;
+use App\Services\Paystack\PaystackCheckout as PaystackCheckoutService;
 
 class PaystackCheckout extends CheckoutGateway
 {

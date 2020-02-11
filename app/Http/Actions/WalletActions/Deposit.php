@@ -5,7 +5,7 @@ namespace App\Http\Actions\WalletActions;
 use App\Helpers\Find;
 use App\Logics\Checkout\Checkout;
 use App\Logics\Checkout\Gateways\Paystack\PaystackCheckout;
-use App\Services\GladePay\PaystackCheckout as PaystackCheckoutService;
+use App\Services\Paystack\PaystackCheckout as PaystackCheckoutService;
 use App\Traits\InventoryTrait;
 use App\Traits\WalletTrait;
 use App\Transaction;

@@ -54,7 +54,7 @@ class ProcessWebhook
 
         $user = User::where(['id' => $transaction->user_id])->first();
 
-        $currentBalance = $this->CreditNaira($user, $quantity / 100, NairaHistory::DEBIT_TYPE);
+        $currentBalance = $this->CreditNaira($user, $quantity / 100, NairaHistory::DEPOSIT_TYPE);
 
         $transaction->update([
             'status' => Transaction::TRANSACTION_SUCCESSFUL

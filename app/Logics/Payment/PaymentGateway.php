@@ -2,12 +2,14 @@
 
 namespace App\Logics\Payment;
 
+use App\Classes\BankDetails;
+
 
 abstract class PaymentGateway
 {
     abstract protected function gatewayName();
 
-    abstract protected function amount();
+    abstract protected function pay(BankDetails $bankDetails, float $amount);
 
     abstract protected function handleError($error);
 
@@ -15,6 +17,6 @@ abstract class PaymentGateway
 
     public function handleNoResponse()
     {
-        return;
+        abort(HTTP_BAD_REQUEST, 'Payment Error');
     }
 }
