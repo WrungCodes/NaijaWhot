@@ -63,9 +63,11 @@ Route::group(['middleware' => ['encrypt', 'jwt.verify', 'email.verify']], functi
 
     Route::post('/deposit', [ControllersDeposit::class, 'deposit'])->name('deposit');
 
-    Route::post('/withdraw', [WithdrawalController::class, 'withdraw'])->name('withdraw');
-
-    Route::get('/banks', [WithdrawalController::class, 'banks'])->name('banks');
+    Route::name('withdrawal.')->prefix('withdrawal')->group(function () {
+        Route::post('/create', [WithdrawalController::class, 'withdraw'])->name('create');
+        Route::get('/banks', [WithdrawalController::class, 'banks'])->name('banks');
+        Route::get('/get', [WithdrawalController::class, 'getAllUserWithdrawals'])->name('get');
+    });
 
     Route::name('stake.')->prefix('stake')->group(function () {
         Route::get('/get', [StakeTypeController::class, 'get'])->name('get');
@@ -97,6 +99,12 @@ Route::group(['middleware' => ['jwt.verify', 'admin']], function () {
         Route::name('stake.')->prefix('stake')->group(function () {
             Route::get('/get', [StakeTypeController::class, 'get'])->name('get');
             Route::post('/create', [StakeTypeController::class, 'create'])->name('create');
+        });
+
+        Route::name('withdrawal.')->prefix('withdrawal')->group(function () {
+            Route::post('/pay', [WithdrawalController::class, 'proccessWithdrawal'])->name('pay');
+            Route::get('/banks', [WithdrawalController::class, 'banks'])->name('banks');
+            Route::get('/get', [WithdrawalController::class, 'getAllWithdrawals'])->name('get');
         });
 
         Route::name('notification.')->prefix('notification')->group(function () {

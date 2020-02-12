@@ -65,6 +65,11 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(Stake::class);
     }
 
+    public function withdrawals()
+    {
+        return $this->hasMany(Withdrawal::class);
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

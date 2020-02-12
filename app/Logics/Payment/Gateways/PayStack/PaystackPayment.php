@@ -18,6 +18,11 @@ class PaystackPayment extends PaymentGateway
         $this->user = $user;
     }
 
+    public function gatewayName()
+    {
+        return 'paystack';
+    }
+
     public function pay(BankDetails $bankDetails, float $amount)
     {
         $createReciepientResponse = $this->paystackPaymentService
@@ -27,20 +32,25 @@ class PaystackPayment extends PaymentGateway
             return $createReciepientResponse;
         }
 
-        if ($createReciepientResponse['status'] != true) {
+        if ($createReciepientResponse['status'] != 201) {
             return $createReciepientResponse;
         }
-
-        $reciepentCode = $createReciepientResponse['data']['recipient_code'];
+        $reciepentCode = $createReciepientResponse['data']['data']['recipient_code'];
 
         return $this->paystackPaymentService->InitializeTransfer($amount, $reciepentCode);
     }
 
     public function handleError($error)
     {
+        if ($error['status'] == 400 && $error['error']['message'] == 'Cannot resolve account') {
+            abort(HTTP_PRECONDITION_FAILED, 'Invalid Account Number');
+        }
+
+        abort(HTTP_BAD_REQUEST, 'Error Occured While Proccessing Try Again Later');
     }
 
     public function handleSuccess($response)
     {
+        $response = $response['data'];
     }
 }

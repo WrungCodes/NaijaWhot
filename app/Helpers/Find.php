@@ -7,6 +7,7 @@ use App\CoinDeal;
 use App\Item;
 use App\StakeType;
 use App\User;
+use App\Withdrawal;
 
 class Find
 {
@@ -28,5 +29,10 @@ class Find
     public static function GetBankWithUid(string $uid)
     {
         return Bank::where(['uid' => $uid])->first();
+    }
+
+    public static function GetWithdrawalWithId(int $id)
+    {
+        return Withdrawal::where(['id' => $id])->first();
     }
 }

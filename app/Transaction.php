@@ -23,4 +23,9 @@ class Transaction extends Model
     protected $hidden = [
         'id'
     ];
+
+    public function withdrawal()
+    {
+        return $this->hasOne(Withdrawal::class, 'transaction_id');
+    }
 }

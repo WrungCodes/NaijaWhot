@@ -21,7 +21,6 @@ class Payment
 
     private function handleResponseStatus($response)
     {
-        dd($response);
         if (!$response) {
             return $this->paymentGateway->handleNoResponse();
         }

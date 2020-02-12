@@ -17,6 +17,6 @@ abstract class PaymentGateway
 
     public function handleNoResponse()
     {
-        abort(HTTP_BAD_REQUEST, 'Payment Error');
+        abort(HTTP_BAD_REQUEST, 'An Error Occured While Processing, Try Again Later');
     }
 }

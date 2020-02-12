@@ -13,6 +13,7 @@ class NairaHistory extends Model
     public const WITHDRAWAL_TYPE = 'withdrawal';
     public const STAKE_TYPE = 'stake';
     public const WIN_TYPE = 'win';
+    public const REFUND_TYPE = 'refund';
 
     protected $fillable = [
         'initial_amount', 'final_amount', 'type', 'user_id', 'amount'

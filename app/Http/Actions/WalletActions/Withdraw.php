@@ -11,6 +11,7 @@ use App\Services\Paystack\PaystackPayment as PaystackPaystackPayment;
 use App\Traits\WalletTrait;
 use App\Transaction;
 use App\User;
+use App\Withdrawal;
 
 class Withdraw
 {
@@ -32,26 +33,36 @@ class Withdraw
 
     public function execute()
     {
-        return $this->processWithdrawal();
+        return $this->logWithdrawal();
     }
 
-    private function processWithdrawal()
+    private function logWithdrawal()
     {
+        // $response = (new Payment(new PaystackPayment(new PaystackPaystackPayment(), $this->user)))
+        //     ->pay($this->bankDetails, $this->amount);
+
         $currentBalance = $this->DebitNaira($this->user, $this->amount, NairaHistory::WITHDRAWAL_TYPE);
 
-        $response = (new Payment(new PaystackPayment(new PaystackPaystackPayment(), $this->user)))
-            ->pay($this->bankDetails, $this->amount);
+        // $transaction = $this->user->transactions()->create([
+        //     'amount' => $this->amount,
+        //     'user_id' => $this->user->id,
+        //     'platform' => $response['platform'],
+        //     'transaction_type' => Transaction::TRANSACTION_TYPE_NAIRA,
+        //     'transaction_ref' => $response['reference'],
+        //     'access_code' =>  $response['access_code'],
+        //     'status' => Transaction::TRANSACTION_PENDING
+        // ]);
+        // return $currentBalance;
 
-        $this->user->transactions()->create([
+        // 'account_number', 'bank_name', 'amount', 'status'
+
+        $withdrawal = $this->user->withdrawals()->create([
+            'account_number' => $this->bankDetails->accountNumber,
+            'bank_name' =>  $this->bankDetails->bankName,
             'amount' => $this->amount,
-            'user_id' => $this->user->id,
-            'platform' => $response['platform'],
-            'transaction_type' => Transaction::TRANSACTION_TYPE_NAIRA,
-            'transaction_ref' => $response['reference'],
-            'access_code' =>  $response['access_code'],
             'status' => Transaction::TRANSACTION_PENDING
         ]);
 
-        return $currentBalance;
+        return $withdrawal;
     }
 }
