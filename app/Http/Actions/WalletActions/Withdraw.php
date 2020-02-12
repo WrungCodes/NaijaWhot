@@ -54,7 +54,6 @@ class Withdraw
             'status' => Transaction::TRANSACTION_PENDING
         ]);
 
-
         $this->user->withdrawals()->create([
             'account_number' => $this->bankDetails->accountNumber,
             'bank_name' =>  $this->bankDetails->bankName,

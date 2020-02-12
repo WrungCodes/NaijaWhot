@@ -33,6 +33,6 @@ class Find
 
     public static function GetWithdrawalWithId(int $id)
     {
-        return Withdrawal::where(['id' => $id])->first();
+        return Withdrawal::find($id);
     }
 }
