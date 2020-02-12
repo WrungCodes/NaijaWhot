@@ -16,13 +16,13 @@ class WithdrawalController extends Controller
 {
     public function withdraw(WithdrawalRequest $request)
     {
-        return ['balance' => (new Withdraw(
+        return ['balance' => number_format((new Withdraw(
             Find::findAuthUser($request),
             $request->account_number,
             $request->bank_uid,
             $request->amount
         ))
-            ->execute()];
+            ->execute(), 2)];
     }
 
     public function getAllUserWithdrawals(Request $request)
