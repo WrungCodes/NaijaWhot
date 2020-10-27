@@ -41,9 +41,9 @@ class CreateUser
 
         // $user->profile()->save($this->createUserProfile(0.00));
 
-            $emailData = Generate::GenerateVerification($user);
+            // $emailData = Generate::GenerateVerification($user);
 
-            SendEmail::verificationMail($user, $emailData);
+            // SendEmail::verificationMail($user, $emailData);
 
             return $user;
         } catch (\Throwable $th) {
