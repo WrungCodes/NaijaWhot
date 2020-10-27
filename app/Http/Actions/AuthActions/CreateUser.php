@@ -5,7 +5,6 @@ namespace App\Http\Actions\AuthActions;
 use App\Helpers\Generate;
 use App\Helpers\SendEmail;
 use App\Http\Requests\Auth\Register;
-use App\Profile;
 use App\User;
 use App\UserType;
 use Illuminate\Support\Facades\Hash;
@@ -15,7 +14,7 @@ class CreateUser
 {
     private $request;
 
-    public function __construct($request)
+    public function __construct(Register $request)
     {
         $this->request = $request;
     }
@@ -33,11 +32,16 @@ class CreateUser
                 'email' => $this->request->email,
                 'password' => Hash::make($this->request->password),
                 'user_type_id' => UserType::PLAYER_USER,
-                // 'email_token' => Generate::generateToken()
+                'email_token' => Generate::generateToken()
             ]);
 
+        //             $user->email_token = null;
+
+        // $user->save();
+
+        // $user->profile()->save($this->createUserProfile(0.00));
+
             $emailData = Generate::GenerateVerification($user);
-            // $user->profile()->save($this->createUserProfile(0.00));
 
             SendEmail::verificationMail($user, $emailData);
 
