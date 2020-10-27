@@ -5,6 +5,7 @@ namespace App\Http\Actions\AuthActions;
 use App\Helpers\Generate;
 use App\Helpers\SendEmail;
 use App\Http\Requests\Auth\Register;
+use App\Profile;
 use App\User;
 use App\UserType;
 use Illuminate\Support\Facades\Hash;
@@ -32,9 +33,10 @@ class CreateUser
                 'email' => $this->request->email,
                 'password' => Hash::make($this->request->password),
                 'user_type_id' => UserType::PLAYER_USER,
-                'email_token' => Generate::generateToken()
+                // 'email_token' => Generate::generateToken()
             ]);
 
+            $user->profile()->save($this->createUserProfile(0.00));
             $emailData = Generate::GenerateVerification($user);
 
             SendEmail::verificationMail($user, $emailData);
@@ -43,5 +45,14 @@ class CreateUser
         } catch (\Throwable $th) {
             abort(HTTP_BAD_REQUEST, "Unable to create user", []);
         }
+    }
+
+    private function createUserProfile(float $naira_balance): Profile
+    {
+        $profile = new Profile;
+
+        $profile->naira_balance = $naira_balance;
+
+        return $profile;
     }
 }
