@@ -36,10 +36,6 @@ class CreateUser
                 'email_token' => null //Generate::generateToken()
             ]);
 
-            // Profile::create([
-
-            // ]);
-
             $user->profile()->save($this->createUserProfile(0.00));
 
             // $emailData = Generate::GenerateVerification($user);
