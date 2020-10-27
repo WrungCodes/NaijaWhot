@@ -29,7 +29,7 @@ class AuthenticationController extends Controller
         return ['message' => 'Logged in successfully', 'token' => JWTAuth::fromUser((new LoginUser($request))->execute())];
     }
 
-    public function register(Register $request)
+    public function register(Request $request)
     {
         return ['message' => 'Registration Successful', 'token' => JWTAuth::fromUser((new CreateUser($request))->execute())];
     }

@@ -15,7 +15,7 @@ class CreateUser
 {
     private $request;
 
-    public function __construct(Register $request)
+    public function __construct($request)
     {
         $this->request = $request;
     }
@@ -43,7 +43,6 @@ class CreateUser
 
             return $user;
         } catch (\Throwable $th) {
-            dd($th);
             abort(HTTP_BAD_REQUEST, "Unable to create user", []);
         }
     }
