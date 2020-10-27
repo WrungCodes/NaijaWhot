@@ -36,8 +36,8 @@ class CreateUser
                 // 'email_token' => Generate::generateToken()
             ]);
 
-            $user->profile()->save($this->createUserProfile(0.00));
             $emailData = Generate::GenerateVerification($user);
+            // $user->profile()->save($this->createUserProfile(0.00));
 
             SendEmail::verificationMail($user, $emailData);
 
