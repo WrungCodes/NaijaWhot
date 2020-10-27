@@ -43,6 +43,7 @@ class CreateUser
 
             return $user;
         } catch (\Throwable $th) {
+            dd($th);
             abort(HTTP_BAD_REQUEST, "Unable to create user", []);
         }
     }
