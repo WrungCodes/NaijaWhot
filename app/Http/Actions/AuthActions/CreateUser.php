@@ -5,6 +5,7 @@ namespace App\Http\Actions\AuthActions;
 use App\Helpers\Generate;
 use App\Helpers\SendEmail;
 use App\Http\Requests\Auth\Register;
+use App\Profile;
 use App\User;
 use App\UserType;
 use Illuminate\Support\Facades\Hash;
@@ -39,7 +40,7 @@ class CreateUser
 
             // ]);
 
-            // $user->profile()->save($this->createUserProfile(0.00));
+            $user->profile()->save($this->createUserProfile(0.00));
 
             // $emailData = Generate::GenerateVerification($user);
 
