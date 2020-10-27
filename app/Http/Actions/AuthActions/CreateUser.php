@@ -32,14 +32,10 @@ class CreateUser
                 'email' => $this->request->email,
                 'password' => Hash::make($this->request->password),
                 'user_type_id' => UserType::PLAYER_USER,
-                'email_token' => Generate::generateToken()
+                'email_token' => null //Generate::generateToken()
             ]);
 
-        //             $user->email_token = null;
-
-        // $user->save();
-
-        // $user->profile()->save($this->createUserProfile(0.00));
+            $user->profile()->save($this->createUserProfile(0.00));
 
             // $emailData = Generate::GenerateVerification($user);
 
